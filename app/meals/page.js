@@ -7,14 +7,10 @@ import getMeals from "@/lib/meals";
 
 async function Meals() {
   const meals = await getMeals();
-  return (
-    <Suspense fallback={<p className= {classes.loading}>Fetching Meals</p>}>
-      <MealsGrid meals={meals} />
-    </Suspense>
-  );
+  return <MealsGrid meals={meals} />;
 }
 
-export default  function MealsPage() {
+export default function MealsPage() {
   return (
     <>
       <header className={classes.header}>
@@ -28,7 +24,9 @@ export default  function MealsPage() {
         </p>
       </header>
       <main className={classes.main}>
-        <Meals />
+        <Suspense fallback={<p className={classes.loading}>Fetching Meals</p>}>
+          <Meals />
+        </Suspense>
       </main>
     </>
   );
